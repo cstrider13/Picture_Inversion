@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+def main():
+	#TODO: Take in the header and store.
+	fin = open(image_filename, "r")
+	header = fin.readline()
+	header += fin.readline()
+	header += fin.readline()
+	pic = fin.readlines()#Read in everything else
+	image_size = len(header.encode('utf-8'))
+	fin.close()
+	pic = pic.strip()
+	len_pic = len(pic)
+	
+	bv_pic = BitVector(textstring=pic)
+	bv_pic = ~bv_pic#Invert
+	
+	fout = open("inverted_image.ppm", "w")
+	fout.write(header)
+	fout.write(bv_pic.get_text_from_bitvector())
+	fout.close()
+	return
+	
+main()
